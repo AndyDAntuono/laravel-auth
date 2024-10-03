@@ -29,3 +29,4 @@ Implementiamo la validazione dei dati dei Progetti nelle operazioni CRUD che lo 
 - eseguo il seeder con il comando php artisan db:seed --class=ProjectSeeder
 - creo un controller di tipo resource per il back-office con il comando php artisan make:controller Admin/ProjectController --resource
 - aggiorno ProjectController.php per includere i metodi CRUD index, show, create e store.
+- modifico web.php per le views di index, show, create e store.
