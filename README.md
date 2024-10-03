@@ -43,3 +43,4 @@ Implementiamo la validazione dei dati dei Progetti nelle operazioni CRUD che lo 
   
   perché per qualche motivo laravel non mi trovava l'index. Togliendo admin ho finalmente avuto accesso all'elenco dei progetti alla pagina che mi permette di crearne di nuovi. 
 
+- per adesso terrò la commentata la auth in web.php visto il problema che ho descritto.
