@@ -44,3 +44,8 @@ Implementiamo la validazione dei dati dei Progetti nelle operazioni CRUD che lo 
   perché per qualche motivo laravel non mi trovava l'index. Togliendo admin ho finalmente avuto accesso all'elenco dei progetti alla pagina che mi permette di crearne di nuovi. 
 
 - per adesso terrò la commentata la auth in web.php visto il problema che ho descritto.
+
+/*ESECUZIONE DEL BONUS*/
+
+- lancio il comando php artisan make:request StoreProjectRequest per creare il StoreProjectRequest, il quale conterrà delle regole di validazione per la creazione di nuovi progetti.
+    -imposto le regole di validazione di StoreProjectRequest.
