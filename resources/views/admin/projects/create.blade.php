@@ -11,7 +11,8 @@
         </div>
         <div class="form-group">
             <label for="description">Descrizione</label>
-            <textarea name="description" id="description" cols="30" rows="10" class="form-control" required></textarea>
+            <textarea name="description" id="description" class="form-control" required></textarea>
         </div>
-        <button type="submit" class="btn success">Salva progetto</button>
+        <button type="submit" class="btn btn-success">Salva progetto</button>
     </form>
+@endsection
