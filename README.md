@@ -23,3 +23,5 @@ Implementiamo la validazione dei dati dei Progetti nelle operazioni CRUD che lo 
 - Modifico la migrazione 2024_10_03_175552_create_projects_table.
 - modifico il file .env per modificare il DB_DATABASE in laravel_auth.
 - in phpMyAdmin creo il database laravel_auth.
+- eseguo la migrazione con il comando php artisan migrate.
+- creo un seeder con il comando php artisan make:seeder ProjectSeeder.
