@@ -27,3 +27,4 @@ Implementiamo la validazione dei dati dei Progetti nelle operazioni CRUD che lo 
 - creo un seeder con il comando php artisan make:seeder ProjectSeeder.
 - effettuo la chiamata del seeder in DatabaseSeeder.php.
 - eseguo il seeder con il comando php artisan db:seed --class=ProjectSeeder
+- creo un controller di tipo resource per il back-office con il comando php artisan make:controller Admin/ProjectController --resource
