@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Project; // Importa correttamente il modello Project
 
 class ProjectSeeder extends Seeder
 {
@@ -14,6 +14,14 @@ class ProjectSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Project::create([
+            'title' => 'Progetto 1',
+            'description' => 'Descrizione del progetto 1',
+        ]);
+
+        Project::create([
+            'title' => 'Progetto 2',
+            'description' => 'Descrizione del progetto 2',
+        ]);
     }
 }

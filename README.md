@@ -25,3 +25,5 @@ Implementiamo la validazione dei dati dei Progetti nelle operazioni CRUD che lo 
 - in phpMyAdmin creo il database laravel_auth.
 - eseguo la migrazione con il comando php artisan migrate.
 - creo un seeder con il comando php artisan make:seeder ProjectSeeder.
+- effettuo la chiamata del seeder in DatabaseSeeder.php.
+- eseguo il seeder con il comando php artisan db:seed --class=ProjectSeeder
