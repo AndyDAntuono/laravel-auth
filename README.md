@@ -32,3 +32,14 @@ Implementiamo la validazione dei dati dei Progetti nelle operazioni CRUD che lo 
 - modifico web.php per le views di index, show, create e store.
 - creo il file index.blade.php.
 - creo il file create.blade.php.
+- prima ho tolto l'auth nel web.php perché altrimenti non potevo accedere all'elenco dei progetti se non eseguivo il login
+- in heade.blade.php ho sostitiuito 
+    
+    <a class="nav-link" href="{{ route('admin.projects.index') }}">Progetti</a>
+    
+    con
+    
+    <a class="nav-link" href="{{ route('projects.index') }}">Progetti</a>
+  
+  perché per qualche motivo laravel non mi trovava l'index. Togliendo admin ho finalmente avuto accesso all'elenco dei progetti alla pagina che mi permette di crearne di nuovi. 
+
