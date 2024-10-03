@@ -18,4 +18,8 @@ Implementiamo la validazione dei dati dei Progetti nelle operazioni CRUD che lo 
 - Installo il progeto base di laravel, con l'aggiunta dei pacchetti e comandi di installazione riguardanti l'autentificazione
 - Creo una cartella partials all'interno di resources/views/layouts, quindi creo il file header.blade.php.
     NB: chiedo venia per i miei tempi ma prima ho voluto ripassare la lezione di stammatiina.
-- modifico app.blade per inlcudere header.blade.php
+- modifico app.blade per inlcudere header.blade.php.
+- Crea il modello e la migrazione associata con il comando php artisan make:model Project -m
+- Modifico la migrazione 2024_10_03_175552_create_projects_table.
+- modifico il file .env per modificare il DB_DATABASE in laravel_auth.
+- in phpMyAdmin creo il database laravel_auth.
