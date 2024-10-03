@@ -51,3 +51,4 @@ Implementiamo la validazione dei dati dei Progetti nelle operazioni CRUD che lo 
     -imposto le regole di validazione di StoreProjectRequest.
 - aggiungo i metodi edit ed update in ProjectController.php
     - aggiungendo il metodo update inserisco anche le regole di validazione per l'aggiornamento dei dati
+- creo il file edit.blade.php e ne scrivo il relativo codice.
