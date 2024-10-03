@@ -13,6 +13,7 @@ class StoreProjectRequest extends FormRequest
      */
     public function authorize()
     {
+        // lo setto su true per evitare il precedente problema di accesso
         return true;
     }
 

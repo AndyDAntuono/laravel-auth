@@ -49,3 +49,5 @@ Implementiamo la validazione dei dati dei Progetti nelle operazioni CRUD che lo 
 
 - lancio il comando php artisan make:request StoreProjectRequest per creare il StoreProjectRequest, il quale conterrà delle regole di validazione per la creazione di nuovi progetti.
     -imposto le regole di validazione di StoreProjectRequest.
+- aggiungo i metodi edit ed update in ProjectController.php
+    - aggiungendo il metodo update inserisco anche le regole di validazione per l'aggiornamento dei dati
