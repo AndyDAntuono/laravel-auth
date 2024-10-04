@@ -32,7 +32,7 @@
             <textarea name="description" class="form-control" id="description" rows="3" required>{{ old('description', $project->description) }}" </textarea>
         </div>
 
-        <button type="submit" class="btn btn.primary">Salva modifiche</button>
+        <button type="submit" class="btn btn-primary">Salva modifiche</button>
     </form>
 </div>
 @endsection

@@ -93,8 +93,11 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        // Reindirizza alla lista dei progetti con un messaggio di successo
+        return redirect()->route('projects.index')->with('success', 'Progetto eliminato con successo!');
     }
 }
