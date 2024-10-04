@@ -1,4 +1,4 @@
-/*CONSEGNA*/
+/*CONSEGNA DEL 03-10-24*/
 
 Esercizio di oggi: Laravel Boolfolio - Base
 nome repo: laravel-auth
@@ -11,6 +11,11 @@ Per la parte di back-office creiamo un resource controller Admin\\ProjectControl
 Fate le crud viste a lezione: index, show, create e store
 Bonus
 Implementiamo la validazione dei dati dei Progetti nelle operazioni CRUD che lo richiedono usando due form requests.
+
+/*CONSEGNA DEL 04-10-24*/
+
+continuate con la repo aperta ieri realizzando le CRUD mancanti, ovvero edit, update e destroy. Per la destroy è richiesta obbligatoriamente la richiesta di conferma di cancellazione, scegliete voi come farla se con la confirm o con la modale di bootstrap.
+Bonus: realizzate la validazione dei campi anche per l'edit
 
 
 /*SOLUZIONE*/
@@ -54,3 +59,5 @@ Implementiamo la validazione dei dati dei Progetti nelle operazioni CRUD che lo 
 - creo il file edit.blade.php e ne scrivo il relativo codice con tanto di regole di validazione.
 - modifico index.blade.php per aggiungere il pulsante "Modifica" relativo ad edit.blade.php. E visto che ci sono sono aggiungo un form per l'eliminazione di un progetto usando il metodo POST con l'annotazione @method('DELETE').
 - ma per far fuonzionare correttamente il bottone Elimina, aggiungo anche il metdo delete nel ProjectController.
+- lancio il comando php artisan make:request UpdateProjectRequest per creare l'iomonima Form Request.
+- modifico ProjectController.php per implementare correttamente UpdateProjectRequest.

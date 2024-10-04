@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -75,15 +76,22 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpfdateProjectRequest $request, Project $project)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
-        //La validazione viene eseguite automaticamente tramiet il FormRequest
-        $data = $request->validated();
+        //validazione dei campi
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+        ]);
 
-        //Aggiorna il progetto con i dati validati
-        $project->update($data);
+        //Aggiorna i campi del progetto
+        $project->title = $validated['title'];
+        $project->description = $validated['description'];
 
-        //Reindirizza alla pagina index con un messaggio di successo
+        //Salva il progetto aggiornato
+        $project->save();
+
+        //Reindirizza dopo l'aggiornamento
         return redirect()->route('projects.index')->with('success', 'Progetto aggiornato con successo!');
     }
 
