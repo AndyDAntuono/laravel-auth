@@ -50,8 +50,6 @@ Bonus: realizzate la validazione dei campi anche per l'edit
 
 - per adesso terrò la commentata la auth in web.php visto il problema che ho descritto.
 
-/*ESECUZIONE DEL BONUS*/
-
 - lancio il comando php artisan make:request StoreProjectRequest per creare il StoreProjectRequest, il quale conterrà delle regole di validazione per la creazione di nuovi progetti.
     -imposto le regole di validazione di StoreProjectRequest.
 - aggiungo i metodi edit ed update in ProjectController.php
@@ -61,3 +59,4 @@ Bonus: realizzate la validazione dei campi anche per l'edit
 - ma per far fuonzionare correttamente il bottone Elimina, aggiungo anche il metdo delete nel ProjectController.
 - lancio il comando php artisan make:request UpdateProjectRequest per creare l'iomonima Form Request.
 - modifico ProjectController.php per implementare correttamente UpdateProjectRequest.
+- aggiungo una conferma per la cancellazione e provo a farlo attraverso la modale di boostrap.
