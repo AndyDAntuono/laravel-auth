@@ -4,7 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Suport\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class AdminMiddleware
 {
@@ -17,12 +18,21 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // Verifica se l'utetente è autenticato e se è un amnistratore
-        if (Auth::check() && Auth::user()->is_admin) {
-            return $next($request);
+        Log::info('AdminMiddleware: verificando autenticazione...');
+
+        // Controllo se l'utente è autenticato
+        if (!Auth::check()) {
+            Log::info('AdminMiddleware: utente non autenticato, reindirizzo a /login');
+            return redirect()->route('login')->with('error', 'Devi effettuare il login per accedere.');
         }
 
-        // Se l'utente non è amnistratore, viene reidirizzato
-        return redirect('/')->with('error', 'Accesso negato.');
+        // Controllo se l'utente è un amministratore
+        if (!Auth::user()->is_admin) {
+            Log::info('AdminMiddleware: utente non amministratore, reindirizzo a /');
+            return redirect()->route('dashboard')->with('error', 'Accesso negato.'); // Usa un nome di rotta se possibile
+        }
+
+        Log::info('AdminMiddleware: utente amministratore, consentito l\'accesso.');
+        return $next($request);
     }
 }

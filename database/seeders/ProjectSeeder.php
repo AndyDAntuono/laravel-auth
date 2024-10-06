@@ -4,8 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Project; // Importa correttamente il modello Project
-use App\Models\User; // modello per l'utente
-
+use App\Models\User; // Modello per l'utente
+use Illuminate\Support\Facades\Hash; // Importa la classe Hash
 
 class ProjectSeeder extends Seeder
 {

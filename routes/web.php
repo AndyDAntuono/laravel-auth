@@ -5,14 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProjectController;
 
 /*
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------- 
 | Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
+|-------------------------------------------------------------------------- 
+| Here is where you can register web routes for your application. 
+| These routes are loaded by the RouteServiceProvider and all of them will 
+| be assigned to the "web" middleware group. Make something great! 
+| 
 */
 
 Route::get('/', function () {
@@ -30,20 +29,14 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::prefix('admin')->group(function () {
-    Route::resource('projects', ProjectController::class);
-});
-
-Route::middleware(['auth'])->group(function () {
-    // Rotte accessibili solo dopo l'autenticazione
     Route::middleware('admin')->group(function () {
-        // Rotte per l'amministratore
-        Route::resource('admin/projects', ProjectController::class);
+        Route::resource('projects', ProjectController::class);
     });
 });
 
-// dal momento che ho avuto problemi di accesso lascio commentata la rotta per accedere alla pagina dei progetti, anche perché sospetto che dobbiamo implementare le rimanenti operazioni CRUD e le relative views.
-//Route::middleware(['auth'])->group(function () {
-//    Route::resource('projects', ProjectController::class);
-//});
+// Rimuovi questa parte di codice, non è necessaria
+// Route::middleware(['auth'])->group(function () {
+//     // Rotte accessibili solo dopo l'autenticazione
+// });
 
 require __DIR__.'/auth.php';

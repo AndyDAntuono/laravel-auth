@@ -69,3 +69,4 @@ Bonus: realizzate la validazione dei campi anche per l'edit
     - modifico AdminMiddleware.php in modo tale che solo l'utente amnistraotore abbia l'accesso.
     - modifico il file kernel.php per registrare il middleware riguardante l'amnistratore.
     - aagiungo una logica di controllo a header.blade.php affinché solo un amministatore autenticato possa gestire i progetti.
+- Ho dovuto riscrivere il codice dei file Kernel.php, header.blade.php, web.php, 2024_10_06_174326_add_is_admin_to_users_table.php, ProjectSeeder.php. E per questi ultimi due ho effettuato i comandi php artisan migrate:rollback, php artisan migrate e php artisan db:seed --class=ProjectSeeder perché ho dovuto rifare la migrazione e la popolazione. Adesso, se vado sul link datomi dal comando php -S localhost:8000 -t public/, il browser ti blocca subito in quanto solo un utente registrato può accedere a questo indirizzo. Il logine funziona corettamente. Non sono riuscito a fare di meglio.
