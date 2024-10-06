@@ -62,3 +62,4 @@ Bonus: realizzate la validazione dei campi anche per l'edit
 - aggiungo una conferma per la cancellazione e provo a farlo attraverso la modale di boostrap.
 - decido di creare manualmente un utente fitizzio che ricopra il ruolo di amnistratore. In questo modo ddovrei implementare l'autentificazione alla repo.
     - modifico ProjectSeeder.php per creare manualmente l'utente amnistratore.
+    - tramite il comando php artisan make:migration add_is_admin_to_users_table --table=users creo una nuova migrazione con tabella riguardante gli utenti e con lo stesso comando aggiungo una colonna dedicata esclusivamente all'amnistratore.
