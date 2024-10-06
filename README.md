@@ -65,3 +65,5 @@ Bonus: realizzate la validazione dei campi anche per l'edit
     - tramite il comando php artisan make:migration add_is_admin_to_users_table --table=users creo una nuova migrazione con tabella riguardante gli utenti e con lo stesso comando aggiungo una colonna dedicata esclusivamente all'amnistratore.
     - lancio la migrazione con il comando php artisan migrate.
     - modifico il file web.php in modo tale che solo degli utenti autenticati, come appunto l'amnistratore, possano accedere a determinati link tramite middleware.
+    - lancio il comando php artisan make:middleware AdminMiddleware per creare l'omonimo file.
+    - modifico AdminMiddleware.php in modo tale che solo l'utente amnistraotore abbia l'accesso.
