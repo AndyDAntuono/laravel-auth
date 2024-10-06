@@ -60,3 +60,5 @@ Bonus: realizzate la validazione dei campi anche per l'edit
 - lancio il comando php artisan make:request UpdateProjectRequest per creare l'iomonima Form Request.
 - modifico ProjectController.php per implementare correttamente UpdateProjectRequest.
 - aggiungo una conferma per la cancellazione e provo a farlo attraverso la modale di boostrap.
+- decido di creare manualmente un utente fitizzio che ricopra il ruolo di amnistratore. In questo modo ddovrei implementare l'autentificazione alla repo.
+    - modifico ProjectSeeder.php per creare manualmente l'utente amnistratore.

@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Project; // Importa correttamente il modello Project
+use App\Models\User; // modello per l'utente
+
 
 class ProjectSeeder extends Seeder
 {
@@ -22,6 +24,13 @@ class ProjectSeeder extends Seeder
         Project::create([
             'title' => 'Progetto 2',
             'description' => 'Descrizione del progetto 2',
+        ]);
+
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@example.com',
+            'password' => Hash::make('password-segreta'), // Password hashata
+            'is_admin' => true, // Aggiungo un campo is_admin per distinguere l'amministratore
         ]);
     }
 }
