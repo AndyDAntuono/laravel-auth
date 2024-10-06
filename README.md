@@ -67,3 +67,4 @@ Bonus: realizzate la validazione dei campi anche per l'edit
     - modifico il file web.php in modo tale che solo degli utenti autenticati, come appunto l'amnistratore, possano accedere a determinati link tramite middleware.
     - lancio il comando php artisan make:middleware AdminMiddleware per creare l'omonimo file.
     - modifico AdminMiddleware.php in modo tale che solo l'utente amnistraotore abbia l'accesso.
+    - modifico il file kernel.php per registrare il middleware riguardante l'amnistratore.
