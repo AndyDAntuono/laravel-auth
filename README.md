@@ -68,3 +68,4 @@ Bonus: realizzate la validazione dei campi anche per l'edit
     - lancio il comando php artisan make:middleware AdminMiddleware per creare l'omonimo file.
     - modifico AdminMiddleware.php in modo tale che solo l'utente amnistraotore abbia l'accesso.
     - modifico il file kernel.php per registrare il middleware riguardante l'amnistratore.
+    - aagiungo una logica di controllo a header.blade.php affinché solo un amministatore autenticato possa gestire i progetti.

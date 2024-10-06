@@ -11,8 +11,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('projects.index') }}">Progetti</a>
                 </li>
+                <!-- Solo per ammistatori autenticati -->
+                @if (Auth::check() && Auth::user()->is_admin)
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.projects.index') }}">Gestisci progetti</a>
+                    </li>
+                @endif
             </ul>
             <ul class="navbar-nav ml-auto">
+                <!-- Autenticazione Links -->
                 @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">Login</a>
