@@ -6,6 +6,7 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateProjectRequest;
+use Illuminate\Support\Str; // importa la facciata Str
 
 class ProjectController extends Controller
 {
@@ -38,13 +39,23 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        // validazione dei campi
         $validated = $request->validate([
             'title' => 'required',
             'description' => 'required',
         ]);
 
-        Project::create($validated);
-        return redirect()->route('projects.index');
+        //crea lo slug dal titolo
+        $slug = Str::slug($validated['title']);
+
+        // crea il progetto includendo lo slug
+        Project::create([
+            'title' => $validated['title'],
+            'description' => $validated['description'],
+            'slug' =>$slug, // salva lo slug nel database
+        ]);
+
+        return redirect()->route('projects.index')->wiith('success', 'Progetto creato con successo');
     }
 
     /**
@@ -87,6 +98,9 @@ class ProjectController extends Controller
         //Aggiorna i campi del progetto
         $project->title = $validated['title'];
         $project->description = $validated['description'];
+
+        // genera il nuovo slug dal titolo
+        $project->slug = Str::slug($validated['title']); // aggiorna lo slug
 
         //Salva il progetto aggiornato
         $project->save();
