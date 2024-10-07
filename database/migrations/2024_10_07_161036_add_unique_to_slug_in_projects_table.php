@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('projects', function (Blueprint $table) {
-            $table->string('slug')->unique()->after('title');// aggiunge il campo slug dopo il titolo
+            $table->string('slug')->unique()->after('title');
         });
     }
 
@@ -26,7 +26,9 @@ return new class extends Migration
     public function down()
     {
         Schema::table('projects', function (Blueprint $table) {
-            $table->dropColumn('slug');// elimina la colonna slug se fa il rollback
+            $table->dropColumn('slug');
         });
     }
 };
+
+

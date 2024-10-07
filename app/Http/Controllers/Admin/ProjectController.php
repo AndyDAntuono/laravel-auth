@@ -6,7 +6,7 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateProjectRequest;
-use Illuminate\Support\Str; // importa la facciata Str
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -32,43 +32,48 @@ class ProjectController extends Controller
     }
 
     /**
+     * Method to generate a unique slug for a project based on the title.
+     *
+     * @param  string  $title
+     * @return string
+     */
+    private function generateUniqueSlug($title)
+    {
+        $slug = Str::slug($title); // Crea lo slug di base
+        $originalSlug = $slug;
+        $counter = 1;
+
+        // Verifica se lo slug esiste già
+        while (Project::where('slug', $slug)->exists()) {
+            $slug = $originalSlug . '-' . $counter; // Aggiunge un numero incrementale se esiste già
+            $counter++;
+        }
+
+        return $slug;
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
-    public function generateUniqueSlug($title)
-    {
-        $slug = Str::slug($title);
-        $originalSlug = $slug;
-        $counter = 1;
-    
-        // Controlla se lo slug esiste già nel database
-        while (Project::where('slug', $slug)->exists()) {
-            $slug = $originalSlug . '-' . $counter;
-            $counter++;
-        }
-    
-        return $slug;
-    }
-
     public function store(Request $request)
     {
-        // validazione dei campi
+        // Validazione dei dati in ingresso
         $validated = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
         ]);
 
-       //crea lo slug univoco dal titolo
-       $slug = $this->generateUniqueSlug($validated['title']);
+        // Genera uno slug unico dal titolo
+        $slug = $this->generateUniqueSlug($validated['title']);
 
-        // crea il progetto includendo lo slug
+        // Crea il progetto con lo slug univoco
         Project::create([
             'title' => $validated['title'],
             'description' => $validated['description'],
-            'slug' =>$slug, // salva lo slug univoco nel database
+            'slug' => $slug, // Salva lo slug unico nel database
         ]);
 
         return redirect()->route('projects.index')->with('success', 'Progetto creato con successo');
@@ -77,7 +82,7 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
     public function show(Project $project)
@@ -88,7 +93,7 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
     public function edit(Project $project)
@@ -99,43 +104,44 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\UpdateProjectRequest  $request
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //validazione dei campi
+        // Validazione dei campi
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
         ]);
 
-        //Aggiorna i campi del progetto
+        // Verifica se il titolo è stato modificato e aggiorna lo slug solo se necessario
+        if ($project->title !== $validated['title']) {
+            // Genera un nuovo slug univoco dal titolo aggiornato
+            $project->slug = $this->generateUniqueSlug($validated['title']);
+        }
+
+        // Aggiorna i dati del progetto
         $project->title = $validated['title'];
         $project->description = $validated['description'];
 
-        /// genera il nuovo slug univoco dal titolo
-        $project->slug = $this->generateUniqueSlug($validated['title']);
-
-        //Salva il progetto aggiornato
+        // Salva le modifiche nel database
         $project->save();
 
-        //Reindirizza dopo l'aggiornamento
         return redirect()->route('projects.index')->with('success', 'Progetto aggiornato con successo!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
     public function destroy(Project $project)
     {
         $project->delete();
 
-        // Reindirizza alla lista dei progetti con un messaggio di successo
         return redirect()->route('projects.index')->with('success', 'Progetto eliminato con successo!');
     }
 }
