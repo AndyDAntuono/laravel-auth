@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('projects', function (Blueprint $table) {
-            $table->string('slug')->unique()->after('title');
+            $table->string('slug')->unique()->after('title'); // Aggiunge la colonna slug con unicità
         });
     }
 
@@ -26,9 +26,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('projects', function (Blueprint $table) {
-            $table->dropColumn('slug');
+            $table->dropUnique(['slug']); // Rimuove unicità in caso di rollback
+            $table->dropColumn('slug'); // Rimuove la colonna slug
         });
     }
 };
-
-

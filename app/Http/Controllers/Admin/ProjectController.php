@@ -35,18 +35,26 @@ class ProjectController extends Controller
      * Method to generate a unique slug for a project based on the title.
      *
      * @param  string  $title
+     * @param  Project|null $project (optional)
      * @return string
      */
-    private function generateUniqueSlug($title)
+    private function generateUniqueSlug($title, Project $project = null)
     {
         $slug = Str::slug($title); // Crea lo slug di base
         $originalSlug = $slug;
         $counter = 1;
 
-        // Verifica se lo slug esiste già
-        while (Project::where('slug', $slug)->exists()) {
-            $slug = $originalSlug . '-' . $counter; // Aggiunge un numero incrementale se esiste già
-            $counter++;
+        // Verifica se lo slug esiste già (escludendo l'ID del progetto in caso di aggiornamento)
+        if ($project) {
+            while (Project::where('slug', $slug)->where('id', '!=', $project->id)->exists()) {
+                $slug = $originalSlug . '-' . $counter; // Aggiunge un numero incrementale se esiste già
+                $counter++;
+            }
+        } else {
+            while (Project::where('slug', $slug)->exists()) {
+                $slug = $originalSlug . '-' . $counter; // Aggiunge un numero incrementale se esiste già
+                $counter++;
+            }
         }
 
         return $slug;
@@ -119,7 +127,7 @@ class ProjectController extends Controller
         // Verifica se il titolo è stato modificato e aggiorna lo slug solo se necessario
         if ($project->title !== $validated['title']) {
             // Genera un nuovo slug univoco dal titolo aggiornato
-            $project->slug = $this->generateUniqueSlug($validated['title']);
+            $project->slug = $this->generateUniqueSlug($validated['title'], $project);
         }
 
         // Aggiorna i dati del progetto

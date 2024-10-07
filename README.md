@@ -76,3 +76,5 @@ Bonus: realizzate la validazione dei campi anche per l'edit
 - per essere sicuro che ogni volta che viene creato o aggiornato un progetto lo slug venga generato automaticamente, aggiungo un metodo nel modello Project.
 - dal momento che mi sono reso conto che lo slug viene creato automaticamente e ciò non ne garantisce la sua unicità. Ergo implemento questa unicità nei metodi create, update e show all'interno di ProjectController.php
 -  creo una migrazione per rendere lo slug un campo unico nella tabella projects tramite il comando php artisan make:migration add_unique_to_slug_in_projects_table --table=projects. Dopo di che lancio il comando php artisan migrate.
+- dato che ho fatto un grandisimo casino lanciando una prima migrazione per inserire lo slug sprovvisto di unicità e poi una seconda per lo slug con unicità, le migrazioni sono in tilt.
+- Mi sono bloccato e non riesco in nessun modo ad avviare la migrazione che da l'unicità allo slug e non ho la più pallida idea del perché!
