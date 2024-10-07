@@ -74,3 +74,4 @@ Bonus: realizzate la validazione dei campi anche per l'edit
 - lancio il comando php artisan make:migration add_slug_to_projects_table --table=projects per aggiiungere una colonna slug ala tabella projects.
 - modifico 2024_10_07_153826_add_slug_to_projects_table per implementare correttamente lo slug.
 - per essere sicuro che ogni volta che viene creato o aggiornato un progetto lo slug venga generato automaticamente, aggiungo un metodo nel modello Project.
+- dal momento che mi sono reso conto che lo slug viene creato automaticamente e ciò non ne garantisce la sua unicità. Ergo implemento questa unicità nei metodi create, update e show all'interno di ProjectController.php
