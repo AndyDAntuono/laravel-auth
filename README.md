@@ -72,4 +72,5 @@ Bonus: realizzate la validazione dei campi anche per l'edit
 - Ho dovuto riscrivere il codice dei file Kernel.php, header.blade.php, web.php, 2024_10_06_174326_add_is_admin_to_users_table.php, ProjectSeeder.php. E per questi ultimi due ho effettuato i comandi php artisan migrate:rollback, php artisan migrate e php artisan db:seed --class=ProjectSeeder perché ho dovuto rifare la migrazione e la popolazione. Adesso, se vado sul link datomi dal comando php -S localhost:8000 -t public/, il browser ti blocca subito in quanto solo un utente registrato può accedere a questo indirizzo. Il logine funziona corettamente. Non sono riuscito a fare di meglio.
 - modifico il file ProjectController.php per includere lo slug
 - lancio il comando php artisan make:migration add_slug_to_projects_table --table=projects per aggiiungere una colonna slug ala tabella projects.
-- modifico 2024_10_07_153826_add_slug_to_projects_table per implementare correttamente lo slug
+- modifico 2024_10_07_153826_add_slug_to_projects_table per implementare correttamente lo slug.
+- per essere sicuro che ogni volta che viene creato o aggiornato un progetto lo slug venga generato automaticamente, aggiungo un metodo nel modello Project.
