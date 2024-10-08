@@ -10,7 +10,7 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'slug'];
+    protected $fillable = ['title', 'description', 'slug', 'image'];
 
     // Hook per generare lo slug automaticamente alla creazione del progetto
     protected static function boot()

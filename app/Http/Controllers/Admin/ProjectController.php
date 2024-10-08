@@ -72,16 +72,26 @@ class ProjectController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
+            'image' => 'nullable|image|max:2048',
         ]);
 
         // Genera uno slug unico dal titolo
         $slug = $this->generateUniqueSlug($validated['title']);
 
-        // Crea il progetto con lo slug univoco
+        //il seguente codice gestisce l'upload dell'immagine
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images, public');
+        } else {
+            //viene caricata un immagine da lorem.picsum
+            $imagePath = 'https://picsum.photos/200/300';
+        }
+
+        // Crea il progetto con lo slug univoco e con l'immagine
         Project::create([
             'title' => $validated['title'],
             'description' => $validated['description'],
             'slug' => $slug, // Salva lo slug unico nel database
+            'image' => $imagePath, // usa l'immagine caricata da Picsum
         ]);
 
         return redirect()->route('projects.index')->with('success', 'Progetto creato con successo');
@@ -122,12 +132,19 @@ class ProjectController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
+            'image' => 'nullable|image|max:2048',
         ]);
 
         // Verifica se il titolo è stato modificato e aggiorna lo slug solo se necessario
         if ($project->title !== $validated['title']) {
             // Genera un nuovo slug univoco dal titolo aggiornato
             $project->slug = $this->generateUniqueSlug($validated['title'], $project);
+        }
+
+        //gestione dell'immagine
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+            $project->image = $imagePath; //aggiorna l'immagine
         }
 
         // Aggiorna i dati del progetto

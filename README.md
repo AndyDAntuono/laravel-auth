@@ -85,3 +85,5 @@ Ricordiamoci di creare il symlink con l’apposito comando artisan e di aggiunge
 - ho risolto il precedente problema con il comando php artisan migrate:refresh --seed suggeritormi dal tutor Alessio Crea.
 - Per iniziare ad implentare l'upload della immgini nella attuale repo, lancio prima di tutto il comando php artisan make:migration add_image_to_projects_table --table=projects per creare una migrazionem il cui compito sarà creare una collona nella tabella projects.
 - una volta creata la migrazione la modifico secondo i miei bisogni e lancio il comando php artisan migrate.
+- nel modello Project, mi assicuro che il campo image sia "fillabile" aggiungendolo all'attributo $fillable
+- nel file ProjectController, implemento l'upload delle immagine andando a modificare il il codice riguardate i metodi stor ed upload
