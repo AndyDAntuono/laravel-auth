@@ -17,6 +17,10 @@ Implementiamo la validazione dei dati dei Progetti nelle operazioni CRUD che lo 
 continuate con la repo aperta ieri realizzando le CRUD mancanti, ovvero edit, update e destroy. Per la destroy è richiesta obbligatoriamente la richiesta di conferma di cancellazione, scegliete voi come farla se con la confirm o con la modale di bootstrap.
 Bonus: realizzate la validazione dei campi anche per l'edit
 
+/*CONSEGNA DEL 08-10-24*/
+
+Ciao ragazzi, continuiamo a lavorare nella repo dei giorni scorsi e aggiungiamo un’immagine ai nostri progetti.
+Ricordiamoci di creare il symlink con l’apposito comando artisan e di aggiungere l’attributo enctype="multipart/form-data" ai form di creazione e di modifica!
 
 /*SOLUZIONE*/
 
@@ -78,3 +82,6 @@ Bonus: realizzate la validazione dei campi anche per l'edit
 -  creo una migrazione per rendere lo slug un campo unico nella tabella projects tramite il comando php artisan make:migration add_unique_to_slug_in_projects_table --table=projects. Dopo di che lancio il comando php artisan migrate.
 - dato che ho fatto un grandisimo casino lanciando una prima migrazione per inserire lo slug sprovvisto di unicità e poi una seconda per lo slug con unicità, le migrazioni sono in tilt.
 - Mi sono bloccato e non riesco in nessun modo ad avviare la migrazione che da l'unicità allo slug e non ho la più pallida idea del perché!
+- ho risolto il precedente problema con il comando php artisan migrate:refresh --seed suggeritormi dal tutor Alessio Crea.
+- Per iniziare ad implentare l'upload della immgini nella attuale repo, lancio prima di tutto il comando php artisan make:migration add_image_to_projects_table --table=projects per creare una migrazionem il cui compito sarà creare una collona nella tabella projects.
+- una volta creata la migrazione la modifico secondo i miei bisogni e lancio il comando php artisan migrate.
