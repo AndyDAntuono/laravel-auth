@@ -32,6 +32,20 @@
             <textarea name="description" class="form-control" id="description" rows="3" required>{{ old('description', $project->description) }}" </textarea>
         </div>
 
+        <div class="form-group">
+            <label for="image">Immagine attuale</label><br>
+            @if($project->image)
+                <img src="{{ $project->image }}" alt="project_img" width="200" height="300"> <!-- anteprima dell'immagine -->
+                @else
+                    <p>Nessuna immagine caricata</p>
+            @endif
+        </div>
+
+        <div class="form-group">
+            <label for="image">Carica nuova immagine</label>
+            <input type="file" name="image" id="image" class="form-control"> <!-- campo per l'upload dell'immagine -->
+        </div>
+
         <button type="submit" class="btn btn-primary">Salva modifiche</button>
     </form>
 </div>

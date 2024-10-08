@@ -87,3 +87,4 @@ Ricordiamoci di creare il symlink con l’apposito comando artisan e di aggiunge
 - una volta creata la migrazione la modifico secondo i miei bisogni e lancio il comando php artisan migrate.
 - nel modello Project, mi assicuro che il campo image sia "fillabile" aggiungendolo all'attributo $fillable
 - nel file ProjectController, implemento l'upload delle immagine andando a modificare il il codice riguardate i metodi stor ed upload
+- mofifico le view di create.blade.php ed edit.blade.php per implementare l'upload delle immagini

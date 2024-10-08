@@ -13,6 +13,10 @@
             <label for="description">Descrizione</label>
             <textarea name="description" id="description" class="form-control" required></textarea>
         </div>
+        <div class="form-group">
+            <label for="image">Immagine</label>
+            <input type="file" name="image" id="image" class="form-control"> <!-- Campo per l'upload dell'immagine -->
+        </div>
         <button type="submit" class="btn btn-success">Salva progetto</button>
     </form>
 @endsection
