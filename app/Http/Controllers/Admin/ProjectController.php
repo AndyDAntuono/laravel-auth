@@ -68,32 +68,30 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        // Validazione dei dati in ingresso
+        // Validazione dei dati in ingresso, inclusa l'immagine
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'image' => 'nullable|image|max:2048',
+            'image' => 'nullable|image|max:2048', // Aggiunto campo immagine, opzionale, con massimo 2MB
         ]);
-
+    
         // Genera uno slug unico dal titolo
         $slug = $this->generateUniqueSlug($validated['title']);
-
-        //il seguente codice gestisce l'upload dell'immagine
+    
+        // Gestione dell'upload immagine
+        $imagePath = null;
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images, public');
-        } else {
-            //viene caricata un immagine da lorem.picsum
-            $imagePath = 'https://picsum.photos/200/300';
+            $imagePath = $request->file('image')->store('images', 'public'); // Salva l'immagine nella cartella storage/app/public/images
         }
-
-        // Crea il progetto con lo slug univoco e con l'immagine
+    
+        // Crea il progetto con lo slug univoco e l'immagine
         Project::create([
             'title' => $validated['title'],
             'description' => $validated['description'],
-            'slug' => $slug, // Salva lo slug unico nel database
-            'image' => $imagePath, // usa l'immagine caricata da Picsum
+            'slug' => $slug,
+            'image' => $imagePath, // Salva il percorso dell'immagine
         ]);
-
+    
         return redirect()->route('projects.index')->with('success', 'Progetto creato con successo');
     }
 
@@ -126,34 +124,38 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProjectRequest $request, Project $project)
+    public function update(Request $request, Project $project)
     {
-        // Validazione dei campi
+        // Validazione dei dati
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'image' => 'nullable|image|max:2048',
+            'image' => 'nullable|image|max:2048', // Aggiunto campo immagine, opzionale
         ]);
-
+    
         // Verifica se il titolo è stato modificato e aggiorna lo slug solo se necessario
         if ($project->title !== $validated['title']) {
-            // Genera un nuovo slug univoco dal titolo aggiornato
-            $project->slug = $this->generateUniqueSlug($validated['title'], $project);
+            $project->slug = $this->generateUniqueSlug($validated['title']);
         }
-
-        //gestione dell'immagine
+    
+        // Gestione dell'upload immagine
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images', 'public');
-            $project->image = $imagePath; //aggiorna l'immagine
+            // Elimina l'immagine precedente se esiste
+            if ($project->image) {
+                Storage::disk('public')->delete($project->image);
+            }
+        
+            // Carica la nuova immagine
+            $project->image = $request->file('image')->store('images', 'public');
         }
-
+    
         // Aggiorna i dati del progetto
         $project->title = $validated['title'];
         $project->description = $validated['description'];
-
+    
         // Salva le modifiche nel database
         $project->save();
-
+    
         return redirect()->route('projects.index')->with('success', 'Progetto aggiornato con successo!');
     }
 

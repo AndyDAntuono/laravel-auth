@@ -35,12 +35,12 @@
         <div class="form-group">
             <label for="image">Immagine attuale</label><br>
             @if($project->image)
-                <img src="{{ $project->image }}" alt="project_img" width="200" height="300"> <!-- anteprima dell'immagine -->
-                @else
-                    <p>Nessuna immagine caricata</p>
+             <!-- Mostra l'immagine dal filesystem -->
+                <img src="{{ asset('storage/' . $project->image) }}" alt="Immagine del progetto" width="200" height="300"> <!-- lascio queste dimensioni perché userò delle immagini da https://picsum.photos/200/300, stavolta però salvate nel pc e nella cartella storage -->
+            @else
+                <p>Nessuna immagine caricata</p>
             @endif
         </div>
-
         <div class="form-group">
             <label for="image">Carica nuova immagine</label>
             <input type="file" name="image" id="image" class="form-control"> <!-- campo per l'upload dell'immagine -->
