@@ -90,3 +90,6 @@ Ricordiamoci di creare il symlink con l’apposito comando artisan e di aggiunge
 - mofifico le view di create.blade.php ed edit.blade.php per implementare l'upload delle immagini
 - dato che sono ciuco non avevo capito che l'upload delle immagini DEVE partire dai dei file salvati in locale dalle nostre cartelle storage. Ergo modifico i files ProjectController.php, create.blade.php ed edit.blade.php nel modo corretto. 
 - dato che sono un ciuco non ho ancora creato la sotto-cartella storage, nella cartella public, in cui inserire le immagini da usare per l'upload.
+- dato che sono un ciuco dovevo lanciare il comando php artisan storage:link per creare la cartella storage.
+- sebbene io riesca a visualizzare la form per inserire un immagine ed avere la possibilità di selezionare l'immagine da caricare, l'upload delle non avviene. Ci deve essere un errore che impedisce il corretto carimento dell'immagine. 
+- nel tentativo di correggere l'errore ho modificato i file ProjectController e il modello Project.php, ma senza successo. A questo punto spero che vendendo la correzione dell'insegnante Fabrizio Mastrobattista di domani mattina io possa scovare la soluzione al mio problema. Altrimenti dovrò mandare un ticket ai tutor nel pomeriggio.

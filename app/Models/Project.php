@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models;  // Aggiungi questo per specificare il namespace corretto
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\HasFactory; // Importa HasFactory
+use Illuminate\Database\Eloquent\Model; // Importa Model
+use Illuminate\Support\Str; // Importa Str per generare lo slug
 
 class Project extends Model
 {
@@ -26,5 +26,11 @@ class Project extends Model
         static::updating(function ($project) {
             $project->slug = Str::slug($project->title);
         });
+    }
+
+    // Accedi al percorso completo dell'immagine
+    public function getImageUrlAttribute()
+    {
+        return $this->image ? asset('storage/' . $this->image) : null;
     }
 }

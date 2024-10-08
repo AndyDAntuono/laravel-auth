@@ -72,27 +72,25 @@ class ProjectController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'image' => 'nullable|image|max:2048', // Aggiunto campo immagine, opzionale, con massimo 2MB
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validazione dell'immagine
         ]);
-    
-        // Genera uno slug unico dal titolo
-        $slug = $this->generateUniqueSlug($validated['title']);
-    
-        // Gestione dell'upload immagine
-        $imagePath = null;
+
+        // Gestisci il file immagine se presente
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images', 'public'); // Salva l'immagine nella cartella storage/app/public/images
+            $imagePath = $request->file('image')->store('public/images');
+        } else {
+            $imagePath = null; // Nessuna immagine caricata
         }
-    
-        // Crea il progetto con lo slug univoco e l'immagine
-        Project::create([
+
+        // Crea il nuovo progetto con lo slug e l'immagine
+        $project = Project::create([
             'title' => $validated['title'],
             'description' => $validated['description'],
-            'slug' => $slug,
-            'image' => $imagePath, // Salva il percorso dell'immagine
+            'slug' => $this->generateUniqueSlug($validated['title']),
+            'image' => $imagePath,
         ]);
-    
-        return redirect()->route('projects.index')->with('success', 'Progetto creato con successo');
+
+        return redirect()->route('projects.index')->with('success', 'Progetto creato con successo!');
     }
 
     /**
@@ -126,36 +124,33 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        // Validazione dei dati
+        // Validazione dei dati in ingresso, inclusa l'immagine
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'image' => 'nullable|image|max:2048', // Aggiunto campo immagine, opzionale
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // validazione dell'immagine
         ]);
-    
-        // Verifica se il titolo è stato modificato e aggiorna lo slug solo se necessario
-        if ($project->title !== $validated['title']) {
-            $project->slug = $this->generateUniqueSlug($validated['title']);
-        }
-    
-        // Gestione dell'upload immagine
+
+        // Gestisci il file immagine se presente
         if ($request->hasFile('image')) {
-            // Elimina l'immagine precedente se esiste
+            // Elimina la vecchia immagine, se esiste
             if ($project->image) {
-                Storage::disk('public')->delete($project->image);
+                Storage::delete($project->image);
             }
-        
-            // Carica la nuova immagine
-            $project->image = $request->file('image')->store('images', 'public');
+
+            // Salva la nuova immagine
+            $imagePath = $request->file('image')->store('public/images');
+            $project->image = $imagePath;
         }
-    
-        // Aggiorna i dati del progetto
+
+        // Aggiorna gli altri campi
         $project->title = $validated['title'];
         $project->description = $validated['description'];
-    
-        // Salva le modifiche nel database
+        $project->slug = $this->generateUniqueSlug($validated['title']);
+
+        // Salva le modifiche
         $project->save();
-    
+
         return redirect()->route('projects.index')->with('success', 'Progetto aggiornato con successo!');
     }
 
