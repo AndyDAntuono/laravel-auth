@@ -89,3 +89,4 @@ Ricordiamoci di creare il symlink con l’apposito comando artisan e di aggiunge
 - nel file ProjectController, implemento l'upload delle immagine andando a modificare il il codice riguardate i metodi stor ed upload
 - mofifico le view di create.blade.php ed edit.blade.php per implementare l'upload delle immagini
 - dato che sono ciuco non avevo capito che l'upload delle immagini DEVE partire dai dei file salvati in locale dalle nostre cartelle storage. Ergo modifico i files ProjectController.php, create.blade.php ed edit.blade.php nel modo corretto. 
+- dato che sono un ciuco non ho ancora creato la sotto-cartella storage, nella cartella public, in cui inserire le immagini da usare per l'upload.
