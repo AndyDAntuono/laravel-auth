@@ -18,7 +18,7 @@
     @endif
 
     <!-- Form per modificare il progetto -->
-    <form action="{{ route('projects.update', $project->id) }}" method="POST">
+    <form action="{{ route('projects.update', $project->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT') <!-- metodo HTTP PUT per aggiornare -->
 
